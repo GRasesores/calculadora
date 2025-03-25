@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡A Multiplicar!</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #33aaff;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #ff69b4;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid #33aaff;
+            border-radius: 8px;
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 18px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #d84793;
+        }
+
+        .result {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>¡A Multiplicar con Animalitos!</h1>
+    <p id="question" class="question"></p>
+    <input type="number" id="answer">
+    <button onclick="checkAnswer()">¡Comprobar!</button>
+    <p id="result" class="result"></p>
+</div>
+
+<script>
+    let num1, num2, correctAnswer;
+
+    function generateQuestion() {
+        num1 = Math.floor(Math.random() * 10) + 1;
+        num2 = Math.floor(Math.random() * 10) + 1;
+        correctAnswer = num1 * num2;
+
+        const animals = ["gatitos", "perritos", "conejitos", "pollitos", "patitos", "ositos", "elefantitos", "leoncitos", "monitos", "caballitos"];
+        const animal1 = animals[Math.floor(Math.random() * animals.length)];
+        const animal2 = animals[Math.floor(Math.random() * animals.length)];
+
+        document.getElementById('question').textContent = `¿Cuántos ${animal1} hay en ${num2} grupos de ${num1}?`;
+        document.getElementById('answer').value = '';
+    }
+
+    function checkAnswer() {
+        const userAnswer = parseInt(document.getElementById('answer').value);
+        const resultElement = document.getElementById('result');
+
+        if (userAnswer === correctAnswer) {
+            resultElement.textContent = '¡Correcto! ¡Eres un genio!';
+            resultElement.className = 'correct';
+        } else {
+            resultElement.textContent = `¡Ups! La respuesta correcta es ${correctAnswer}. ¡Sigue practicando!`;
+            resultElement.className = 'incorrect';
+        }
+
+        generateQuestion();
+    }
+
+    generateQuestion();
+</script>
+
+</body>
+</html>
